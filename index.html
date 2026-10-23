@@ -71,11 +71,28 @@
             color: var(--accent)
         }
 
+        .brand-block {
+            display: flex;
+            flex-direction: column;
+            gap: 2px
+        }
+
+        .brand-phone {
+            font-size: .85rem;
+            font-weight: 700;
+            color: var(--muted)
+        }
+
+        .brand-phone:hover {
+            color: var(--accent)
+        }
+
         .navlinks {
             display: flex;
             gap: 24px;
             align-items: center;
             font-size: .91rem;
+            font-weight: 700;
             color: var(--muted)
         }
 
@@ -634,7 +651,7 @@
             .navlinks {
                 display: none;
                 position: absolute;
-                top: 72px;
+                top: 92px;
                 left: 14px;
                 right: 14px;
                 padding: 18px;
@@ -679,7 +696,9 @@
 
 <body>
     <main class="root">
-        <header class="wrap nav"><a class="brand" href="#home">MK<span>.</span></a>
+        <header class="wrap nav">
+            <div class="brand-block"><a class="brand" href="#home">Mahalingam Kesavan<span>.</span></a><a
+                    class="brand-phone" href="tel:+918760097598">+91 87600 97598</a></div>
             <nav class="navlinks" id="navlinks"><a href="#about">About</a><a href="#skills">Skills</a><a href="#ai">AI &
                     Innovation</a><a href="#experience">Experience</a><a href="#projects">Projects</a><a
                     href="#contact">Contact</a></nav>
