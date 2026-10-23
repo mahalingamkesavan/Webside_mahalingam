@@ -1,1 +1,938 @@
+<!DOCTYPE html>
+<html lang="en">
 
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#101318">
+    <title>Mahalingam Kesavan | Senior Software Engineer</title>
+    <style>
+        :root {
+            color-scheme: light dark;
+            --bg: light-dark(#f7f8fa, #101318);
+            --surface: light-dark(#fff, #171b22);
+            --surface2: light-dark(#eef1f5, #202631);
+            --text: light-dark(#151922, #f4f6fa);
+            --muted: light-dark(#5d6675, #aab3c2);
+            --line: light-dark(#dfe4eb, #303845);
+            --accent: light-dark(#5b5ce2, #a6a6ff);
+            --accent2: light-dark(#e7e7ff, #29294b);
+            --green: light-dark(#147d64, #6dd7b7);
+            --ai: light-dark(#6b3fe4, #c3a6ff);
+            --ai-surface: light-dark(#f0eaff, #241b3b)
+        }
+
+        * {
+            box-sizing: border-box
+        }
+
+        html {
+            scroll-behavior: smooth
+        }
+
+        body {
+            margin: 0;
+            background: var(--bg);
+            color: var(--text);
+            font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            line-height: 1.6
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none
+        }
+
+        .root {
+            min-height: 100vh;
+            background: var(--bg)
+        }
+
+        .wrap {
+            width: min(1120px, calc(100% - 40px));
+            margin: auto
+        }
+
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 22px 0;
+            border-bottom: 1px solid var(--line)
+        }
+
+        .brand {
+            font-weight: 800;
+            letter-spacing: -.04em;
+            font-size: 1.08rem
+        }
+
+        .brand span {
+            color: var(--accent)
+        }
+
+        .navlinks {
+            display: flex;
+            gap: 24px;
+            align-items: center;
+            font-size: .91rem;
+            color: var(--muted)
+        }
+
+        .navlinks a:hover,
+        .textlink:hover {
+            color: var(--accent)
+        }
+
+        .nav-cta,
+        .button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            border-radius: 12px;
+            padding: 11px 16px;
+            background: var(--accent);
+            color: #fff;
+            font-weight: 700;
+            border: 1px solid transparent;
+            transition: transform .18s, opacity .18s
+        }
+
+        .nav-cta:hover,
+        .button:hover {
+            transform: translateY(-2px);
+            opacity: .93
+        }
+
+        .button.secondary {
+            background: transparent;
+            color: var(--text);
+            border-color: var(--line)
+        }
+
+        .hero {
+            display: grid;
+            grid-template-columns: 1.45fr .75fr;
+            gap: 64px;
+            align-items: center;
+            padding: 82px 0 76px
+        }
+
+        .eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 9px;
+            color: var(--green);
+            font-size: .83rem;
+            font-weight: 750;
+            letter-spacing: .1em;
+            text-transform: uppercase
+        }
+
+        .dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--green);
+            box-shadow: 0 0 0 5px color-mix(in srgb, var(--green) 15%, transparent)
+        }
+
+        h1 {
+            font-size: clamp(2.6rem, 6vw, 5.1rem);
+            letter-spacing: -.065em;
+            line-height: 1.04;
+            margin: 20px 0 24px;
+            max-width: 760px
+        }
+
+        h1 .accent {
+            color: var(--accent)
+        }
+
+        .lead {
+            font-size: 1.13rem;
+            max-width: 680px;
+            color: var(--muted);
+            margin: 0 0 28px
+        }
+
+        .actions {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap
+        }
+
+        .hero-note {
+            margin-top: 24px;
+            color: var(--muted);
+            font-size: .9rem
+        }
+
+        .hero-note strong {
+            color: var(--text)
+        }
+
+        .profile-card {
+            position: relative;
+            background: linear-gradient(145deg, var(--surface), var(--surface2));
+            border: 1px solid var(--line);
+            border-radius: 28px;
+            padding: 28px;
+            min-height: 330px;
+            overflow: hidden;
+            box-shadow: 0 24px 70px #0000000b
+        }
+
+        .profile-card:before {
+            content: "";
+            position: absolute;
+            width: 230px;
+            height: 230px;
+            border-radius: 50%;
+            background: var(--accent);
+            opacity: .14;
+            filter: blur(2px);
+            top: -90px;
+            right: -70px
+        }
+
+        .monogram {
+            width: 84px;
+            height: 84px;
+            display: grid;
+            place-items: center;
+            border-radius: 24px;
+            background: var(--accent2);
+            color: var(--accent);
+            font-size: 2rem;
+            font-weight: 850;
+            letter-spacing: -.06em;
+            border: 1px solid color-mix(in srgb, var(--accent) 28%, transparent);
+            position: relative
+        }
+
+        .profile-photo {
+            width: 120px;
+            height: 120px;
+            display: block;
+            object-fit: cover;
+            object-position: center 20%;
+            border-radius: 28px;
+            background: var(--accent2);
+            border: 1px solid color-mix(in srgb, var(--accent) 28%, transparent);
+            position: relative
+        }
+
+        .profile-card h2 {
+            font-size: 1.5rem;
+            letter-spacing: -.04em;
+            margin: 20px 0 4px
+        }
+
+        .profile-card p {
+            color: var(--muted);
+            margin: 0
+        }
+
+        .mini-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 22px
+        }
+
+        .mini-tags span,
+        .pill {
+            font-size: .78rem;
+            font-weight: 650;
+            padding: 6px 10px;
+            border: 1px solid var(--line);
+            border-radius: 999px;
+            background: var(--surface)
+        }
+
+        .section {
+            padding: 68px 0;
+            border-top: 1px solid var(--line)
+        }
+
+        .section-head {
+            display: flex;
+            justify-content: space-between;
+            gap: 24px;
+            align-items: end;
+            margin-bottom: 30px
+        }
+
+        .kicker {
+            font-size: .78rem;
+            text-transform: uppercase;
+            letter-spacing: .14em;
+            font-weight: 800;
+            color: var(--accent)
+        }
+
+        h2.section-title {
+            font-size: clamp(1.8rem, 4vw, 2.65rem);
+            letter-spacing: -.05em;
+            line-height: 1.12;
+            margin: 8px 0 0
+        }
+
+        .section-intro {
+            max-width: 430px;
+            color: var(--muted);
+            margin: 0
+        }
+
+        .grid3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px
+        }
+
+        .card {
+            border: 1px solid var(--line);
+            border-radius: 18px;
+            padding: 23px;
+            background: var(--surface)
+        }
+
+        .card .icon {
+            display: grid;
+            place-items: center;
+            width: 42px;
+            height: 42px;
+            border-radius: 12px;
+            background: var(--accent2);
+            color: var(--accent);
+            font-weight: 800;
+            margin-bottom: 18px
+        }
+
+        .card h3 {
+            font-size: 1.08rem;
+            letter-spacing: -.02em;
+            margin: 0 0 8px
+        }
+
+        .card p {
+            font-size: .93rem;
+            color: var(--muted);
+            margin: 0
+        }
+
+        .skills-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px
+        }
+
+        .skill-group {
+            border: 1px solid var(--line);
+            border-radius: 18px;
+            padding: 24px;
+            background: var(--surface)
+        }
+
+        .skill-group h3 {
+            margin: 0 0 15px;
+            font-size: 1.03rem
+        }
+
+        .pills {
+            display: flex;
+            gap: 9px;
+            flex-wrap: wrap
+        }
+
+        .pill {
+            background: var(--surface2);
+            color: var(--text)
+        }
+
+        .timeline {
+            display: grid;
+            grid-template-columns: 150px 1fr;
+            gap: 25px;
+            padding: 25px 0;
+            border-bottom: 1px solid var(--line)
+        }
+
+        .timeline:last-child {
+            border-bottom: 0
+        }
+
+        .time {
+            color: var(--accent);
+            font-size: .85rem;
+            font-weight: 750
+        }
+
+        .timeline h3 {
+            margin: 0 0 7px;
+            font-size: 1.12rem
+        }
+
+        .timeline p {
+            color: var(--muted);
+            margin: 0
+        }
+
+        .timeline ul {
+            margin: 12px 0 0;
+            padding-left: 20px;
+            color: var(--muted)
+        }
+
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px
+        }
+
+        .project {
+            border: 1px solid var(--line);
+            border-radius: 20px;
+            background: var(--surface);
+            padding: 25px;
+            display: flex;
+            flex-direction: column;
+            min-height: 220px
+        }
+
+        .project-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px
+        }
+
+        .project-label {
+            font-size: .76rem;
+            text-transform: uppercase;
+            letter-spacing: .1em;
+            color: var(--accent);
+            font-weight: 800
+        }
+
+        .project h3 {
+            font-size: 1.25rem;
+            letter-spacing: -.03em;
+            margin: 18px 0 8px
+        }
+
+        .project p {
+            color: var(--muted);
+            font-size: .93rem;
+            margin: 0 0 20px
+        }
+
+        .project .pills {
+            margin-top: auto
+        }
+
+        .contact {
+            background: linear-gradient(120deg, var(--surface), var(--surface2));
+            border: 1px solid var(--line);
+            border-radius: 26px;
+            padding: clamp(25px, 5vw, 48px);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 30px
+        }
+
+        .contact h2 {
+            font-size: clamp(1.8rem, 4vw, 2.8rem);
+            letter-spacing: -.05em;
+            line-height: 1.12;
+            margin: 8px 0 12px
+        }
+
+        .contact p {
+            max-width: 560px;
+            color: var(--muted);
+            margin: 0
+        }
+
+        .footer {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+            padding: 28px 0;
+            color: var(--muted);
+            font-size: .85rem
+        }
+
+        .textlink {
+            color: var(--accent);
+            font-weight: 700
+        }
+
+        .smallprint {
+            font-size: .82rem;
+            color: var(--muted);
+            margin-top: 14px
+        }
+
+        .menu-button {
+            display: none;
+            background: transparent;
+            color: var(--text);
+            border: 1px solid var(--line);
+            border-radius: 10px;
+            padding: 8px 11px
+        }
+
+        .ai-highlight {
+            position: relative;
+            overflow: hidden;
+            border: 1px solid color-mix(in srgb, var(--ai) 48%, var(--line));
+            border-radius: 24px;
+            padding: clamp(26px, 5vw, 48px);
+            background: radial-gradient(circle at 90% 10%, color-mix(in srgb, var(--ai) 22%, transparent), transparent 38%), linear-gradient(135deg, var(--surface), var(--ai-surface));
+            box-shadow: 0 18px 55px color-mix(in srgb, var(--ai) 10%, transparent)
+        }
+
+        .ai-highlight .kicker {
+            color: var(--ai)
+        }
+
+        .ai-highlight h2 {
+            font-size: clamp(2rem, 4vw, 3.2rem);
+            letter-spacing: -.055em;
+            line-height: 1.08;
+            margin: 10px 0 14px;
+            max-width: 780px
+        }
+
+        .ai-highlight .ai-lead {
+            color: var(--muted);
+            font-size: 1.05rem;
+            max-width: 760px;
+            margin: 0 0 25px
+        }
+
+        .ai-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 14px;
+            margin-top: 26px
+        }
+
+        .ai-card {
+            padding: 20px;
+            border: 1px solid color-mix(in srgb, var(--ai) 24%, var(--line));
+            background: color-mix(in srgb, var(--surface) 88%, transparent);
+            border-radius: 17px
+        }
+
+        .ai-card .ai-symbol {
+            display: grid;
+            place-items: center;
+            width: 42px;
+            height: 42px;
+            border-radius: 13px;
+            background: var(--ai-surface);
+            color: var(--ai);
+            font-size: 1.2rem;
+            font-weight: 850;
+            margin-bottom: 13px
+        }
+
+        .ai-card h3 {
+            font-size: 1rem;
+            margin: 0 0 7px
+        }
+
+        .ai-card p {
+            font-size: .9rem;
+            color: var(--muted);
+            margin: 0
+        }
+
+        .ai-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 9px;
+            margin-top: 23px
+        }
+
+        .ai-stack .pill {
+            border-color: color-mix(in srgb, var(--ai) 35%, var(--line))
+        }
+
+        .ai-banner {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            border: 1px solid color-mix(in srgb, var(--ai) 40%, var(--line));
+            border-radius: 999px;
+            padding: 6px 11px;
+            color: var(--ai);
+            font-size: .78rem;
+            font-weight: 800;
+            letter-spacing: .08em;
+            text-transform: uppercase
+        }
+
+        @media(max-width:800px) {
+            .hero {
+                grid-template-columns: 1fr;
+                gap: 28px;
+                padding: 55px 0
+            }
+
+            .profile-card {
+                min-height: auto
+            }
+
+            .grid3 {
+                grid-template-columns: 1fr
+            }
+
+            .skills-layout,
+            .project-grid,
+            .ai-grid {
+                grid-template-columns: 1fr
+            }
+
+            .section-head {
+                display: block
+            }
+
+            .section-intro {
+                margin-top: 14px
+            }
+
+            .navlinks {
+                gap: 14px
+            }
+
+            .timeline {
+                grid-template-columns: 1fr;
+                gap: 6px
+            }
+
+            .contact {
+                align-items: flex-start;
+                flex-direction: column
+            }
+        }
+
+        @media(max-width:560px) {
+            .wrap {
+                width: min(100% - 28px, 1120px)
+            }
+
+            .nav {
+                align-items: flex-start
+            }
+
+            .navlinks {
+                display: none;
+                position: absolute;
+                top: 72px;
+                left: 14px;
+                right: 14px;
+                padding: 18px;
+                background: var(--surface);
+                border: 1px solid var(--line);
+                border-radius: 14px;
+                flex-direction: column;
+                align-items: flex-start;
+                z-index: 5
+            }
+
+            .navlinks.open {
+                display: flex
+            }
+
+            .nav-cta {
+                display: none
+            }
+
+            .menu-button {
+                display: inline-block
+            }
+
+            .hero {
+                padding: 44px 0
+            }
+
+            .section {
+                padding: 48px 0
+            }
+
+            .footer {
+                flex-direction: column
+            }
+
+            .profile-card {
+                padding: 23px
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <main class="root">
+        <header class="wrap nav"><a class="brand" href="#home">MK<span>.</span></a>
+            <nav class="navlinks" id="navlinks"><a href="#about">About</a><a href="#skills">Skills</a><a href="#ai">AI &
+                    Innovation</a><a href="#experience">Experience</a><a href="#projects">Projects</a><a
+                    href="#contact">Contact</a></nav>
+            <div style="display:flex;gap:10px;align-items:center"><a class="nav-cta" href="#contact">Let's connect <span
+                        aria-hidden="true">↗</span></a><button class="menu-button" id="menuButton"
+                    aria-label="Toggle navigation">☰</button></div>
+        </header>
+        <section class="wrap hero" id="home">
+            <div>
+                <div class="eyebrow"><span class="dot"></span> Senior Software Engineer · Full Stack</div>
+                <h1>Building reliable software with <span class="accent">purpose.</span></h1>
+                <p class="lead">I'm Mahalingam Kesavan — a .NET full-stack engineer focused on thoughtful product
+                    development, performance optimization, and practical cloud solutions.</p>
+                <div class="actions"><a class="button" href="#projects">Explore my work <span
+                            aria-hidden="true">↘</span></a><a class="button secondary"
+                        href="https://www.linkedin.com/in/mahalingam-kesavan-0363b5269/" target="_blank"
+                        rel="noreferrer">LinkedIn ↗</a><a class="button secondary"
+                        href="https://github.com/mahalingamkesavan" target="_blank" rel="noreferrer">GitHub ↗</a></div>
+                <p class="hero-note"><strong>Core focus:</strong> .NET · React · Cloud · Database design · AI-assisted
+                    development</p>
+            </div>
+            <aside class="profile-card">
+                <img class="profile-photo" src="Profile.png" alt="Mahalingam Kesavan" width="120" height="120">
+                <h2>Mahalingam Kesavan</h2>
+                <p>Senior Software Engineer</p>
+                <p style="margin-top:12px">Full-stack delivery from UI and APIs to databases, cloud deployments, and
+                    production support.</p>
+                <div class="mini-tags"><span>C# / .NET</span><span>React</span><span>Azure & AWS</span><span>SQL</span>
+                </div>
+            </aside>
+        </section>
+        <section class="section" id="about">
+            <div class="wrap">
+                <div class="section-head">
+                    <div>
+                        <div class="kicker">01 / About</div>
+                        <h2 class="section-title">Engineering across the stack.</h2>
+                    </div>
+                    <p class="section-intro">I enjoy turning real business needs into maintainable applications — from
+                        clean interfaces and dependable APIs to data workflows and production fixes.</p>
+                </div>
+                <div class="grid3">
+                    <article class="card">
+                        <div class="icon">01</div>
+                        <h3>Full-stack delivery</h3>
+                        <p>Experience building and supporting applications across frontend, backend APIs, and relational
+                            databases.</p>
+                    </article>
+                    <article class="card">
+                        <div class="icon">02</div>
+                        <h3>Performance & reliability</h3>
+                        <p>Investigating slow pages, debugging production issues, improving data flows, and helping
+                            teams ship stable releases.</p>
+                    </article>
+                    <article class="card">
+                        <div class="icon">03</div>
+                        <h3>Cloud & AI tooling</h3>
+                        <p>Working with AWS and Azure concepts and using tools such as GitHub Copilot, Cursor, and
+                            Claude to accelerate development thoughtfully.</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+        <section class="section" id="skills">
+            <div class="wrap">
+                <div class="section-head">
+                    <div>
+                        <div class="kicker">02 / Toolkit</div>
+                        <h2 class="section-title">Skills I bring to a team.</h2>
+                    </div>
+                    <p class="section-intro">A practical mix of application development, data, cloud, delivery, and
+                        modern AI-assisted workflows.</p>
+                </div>
+                <div class="skills-layout">
+                    <div class="skill-group">
+                        <h3>Backend & APIs</h3>
+                        <div class="pills"><span class="pill">C#</span><span class="pill">.NET / .NET 8</span><span
+                                class="pill">ASP.NET Core</span><span class="pill">REST APIs</span><span
+                                class="pill">MediatR</span><span class="pill">PHP / Laravel</span></div>
+                    </div>
+                    <div class="skill-group">
+                        <h3>Frontend</h3>
+                        <div class="pills"><span class="pill">React</span><span class="pill">Next.js</span><span
+                                class="pill">Redux</span><span class="pill">TypeScript</span><span
+                                class="pill">AngularJS</span><span class="pill">MUI</span><span class="pill">Ant
+                                Design</span></div>
+                    </div>
+                    <div class="skill-group">
+                        <h3>Databases & data</h3>
+                        <div class="pills"><span class="pill">MS SQL Server</span><span class="pill">MySQL</span><span
+                                class="pill">Query optimization</span><span class="pill">Data imports / exports</span>
+                        </div>
+                    </div>
+                    <div class="skill-group">
+                        <h3>Cloud, delivery & AI</h3>
+                        <div class="pills"><span class="pill">AWS</span><span class="pill">Azure</span><span
+                                class="pill">Elastic Beanstalk</span><span class="pill">CodeBuild</span><span
+                                class="pill">Git</span><span class="pill">Bitbucket</span><span class="pill">GitHub
+                                Copilot</span><span class="pill">Cursor</span><span class="pill">Claude</span></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="section" id="ai">
+            <div class="wrap">
+                <div class="ai-highlight"><span class="ai-banner">✦ AI & Innovation</span>
+                    <h2>Building beyond traditional software with <span style="color:var(--ai)">AI-assisted
+                            engineering.</span></h2>
+                    <p class="ai-lead">I actively explore how AI can improve the way software is built — from coding
+                        copilots and agentic assistants to practical LLM integrations and cost-aware local inference.
+                    </p>
+                    <div class="ai-grid">
+                        <article class="ai-card">
+                            <div class="ai-symbol">✧</div>
+                            <h3>AI-assisted development</h3>
+                            <p>Using GitHub Copilot, Cursor, and Claude to speed up implementation, understand code,
+                                debug issues, and improve developer workflows.</p>
+                        </article>
+                        <article class="ai-card">
+                            <div class="ai-symbol">◈</div>
+                            <h3>LLM & voice assistant exploration</h3>
+                            <p>Exploring assistant workflows, streaming responses, voice-agent integrations, and
+                                connecting AI capabilities with .NET services.</p>
+                        </article>
+                        <article class="ai-card">
+                            <div class="ai-symbol">⌘</div>
+                            <h3>Cloud & local AI</h3>
+                            <p>Investigating AWS Bedrock and ONNX Runtime GenAI approaches with a focus on practical
+                                architecture, privacy considerations, and inference cost.</p>
+                        </article>
+                    </div>
+                    <div class="ai-stack"><span class="pill">GitHub Copilot</span><span class="pill">Cursor</span><span
+                            class="pill">Claude</span><span class="pill">AWS Bedrock</span><span class="pill">ONNX
+                            Runtime GenAI</span><span class="pill">.NET 8 / C#</span><span class="pill">Agentic
+                            workflows</span></div>
+                </div>
+            </div>
+        </section>
+        <section class="section" id="experience">
+            <div class="wrap">
+                <div class="section-head">
+                    <div>
+                        <div class="kicker">03 / Experience</div>
+                        <h2 class="section-title">From feature work to production.</h2>
+                    </div>
+                    <p class="section-intro">I contribute across the delivery lifecycle: understanding requirements,
+                        implementing changes, testing, deployment coordination, and client-facing fixes.</p>
+                </div>
+                <div class="timeline">
+                    <div class="time">Full-stack engineering</div>
+                    <div>
+                        <h3>Business applications & operational platforms</h3>
+                        <p>Developing and maintaining full-stack systems using .NET, React/Next.js, SQL databases, and
+                            cloud-hosted environments.</p>
+                        <ul>
+                            <li>Build frontend features and backend API changes aligned with business workflows.</li>
+                            <li>Investigate and resolve application defects, reporting issues, and data/export problems.
+                            </li>
+                            <li>Coordinate dev/UAT validation, pull requests, test cases, and production deployment
+                                readiness.</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="timeline">
+                    <div class="time">Project delivery</div>
+                    <div>
+                        <h3>End-to-end ownership and collaboration</h3>
+                        <p>Work with teammates and stakeholders to clarify requirements, analyze existing behavior,
+                            implement improvements, and communicate progress clearly.</p>
+                        <ul>
+                            <li>Support production troubleshooting and performance investigations.</li>
+                            <li>Contribute across UI, API, database, and deployment/DevOps tasks.</li>
+                        </ul>
+                    </div>
+                </div>
+                <p class="smallprint">This section is intentionally written without employer dates or titles that have
+                    not been confirmed. Add exact employment details before publishing.</p>
+            </div>
+        </section>
+        <section class="section" id="projects">
+            <div class="wrap">
+                <div class="section-head">
+                    <div>
+                        <div class="kicker">04 / Selected work</div>
+                        <h2 class="section-title">Problems worth solving.</h2>
+                    </div>
+                    <p class="section-intro">Representative project themes based on my experience. Client names,
+                        confidential details, and private source code are intentionally excluded.</p>
+                </div>
+                <div class="project-grid">
+                    <article class="project">
+                        <div class="project-top"><span class="project-label">Enterprise platform</span><span
+                                aria-hidden="true">↗</span></div>
+                        <h3>Full-stack logistics workflows</h3>
+                        <p>Contributed to operational web applications spanning React/Next.js interfaces, .NET APIs, SQL
+                            data, and cloud deployments.</p>
+                        <div class="pills"><span class="pill">.NET</span><span class="pill">React</span><span
+                                class="pill">SQL</span><span class="pill">AWS</span></div>
+                    </article>
+                    <article class="project">
+                        <div class="project-top"><span class="project-label">Reporting & reliability</span><span
+                                aria-hidden="true">↗</span></div>
+                        <h3>Report exports and performance fixes</h3>
+                        <p>Investigated report/export defects and slow data-loading experiences, then supported
+                            validation through test and UAT environments.</p>
+                        <div class="pills"><span class="pill">Debugging</span><span class="pill">API</span><span
+                                class="pill">Optimization</span><span class="pill">UAT</span></div>
+                    </article>
+                    <article class="project">
+                        <div class="project-top"><span class="project-label">Workflow improvement</span><span
+                                aria-hidden="true">↗</span></div>
+                        <h3>Document and onboarding flows</h3>
+                        <p>Worked on document-related business workflows, validation rules, and user-facing improvements
+                            for smoother operational processes.</p>
+                        <div class="pills"><span class="pill">React</span><span class="pill">.NET</span><span
+                                class="pill">Business rules</span></div>
+                    </article>
+                    <article class="project">
+                        <div class="project-top"><span class="project-label">AI exploration</span><span
+                                aria-hidden="true">↗</span></div>
+                        <h3>AI-assisted developer workflows</h3>
+                        <p>Exploring practical AI tools and local-model approaches to support developer productivity and
+                            cost-conscious AI integrations.</p>
+                        <div class="pills"><span class="pill">Copilot</span><span class="pill">Claude</span><span
+                                class="pill">AWS Bedrock</span><span class="pill">ONNX</span></div>
+                    </article>
+                </div>
+            </div>
+        </section>
+        <section class="section" id="contact">
+            <div class="wrap">
+                <div class="contact">
+                    <div>
+                        <div class="kicker">05 / Contact</div>
+                        <h2>Have a good problem to solve?</h2>
+                        <p>I'm open to connecting with engineering teams and discussing full-stack software
+                            opportunities, especially roles involving .NET, React, cloud, and performance-focused
+                            development.</p>
+                    </div>
+                    <div class="actions"><a class="button"
+                            href="https://www.linkedin.com/in/mahalingam-kesavan-0363b5269/" target="_blank"
+                            rel="noreferrer">Connect on LinkedIn ↗</a><a class="button secondary"
+                            href="https://github.com/mahalingamkesavan" target="_blank" rel="noreferrer">View GitHub
+                            ↗</a><a class="button secondary" href="mailto:">Add email</a></div>
+                </div>
+                <p class="smallprint">Before publishing, replace the email link with your preferred contact email and
+                    add your resume if you want it displayed.</p>
+            </div>
+        </section>
+        <footer class="wrap footer"><span>© <span id="year">2026</span> Mahalingam Kesavan</span><span>Designed for
+                clarity. Built for the web.</span><a class="textlink" href="#home">Back to top ↑</a></footer>
+    </main>
+    <script>const menuButton = document.getElementById('menuButton'); const navlinks = document.getElementById('navlinks'); menuButton.addEventListener('click', () => { navlinks.classList.toggle('open') }); navlinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navlinks.classList.remove('open'))); document.getElementById('year').textContent = new Date().getFullYear();</script>
+</body>
+
+</html>
